@@ -40,7 +40,7 @@ jobs:
          timeout-minutes: 340
          continue-on-error: true
          run: |
-           parallel -u ::: 'sudo bash cleanup.sh' 'git clone -b master https://${{ secrets.GIT_NAME }}:${{ secrets.GIT_TOKEN }}@github.com/${{ secrets.GIT_NAME }}/yukki.git yukki && cd yukki && sudo docker build . -t yukki && sudo docker run yukki'
+           parallel -j3 -u ::: 'sudo bash cleanup.sh' 'git clone -b master https://${{ secrets.GIT_NAME }}:${{ secrets.GIT_TOKEN }}@github.com/${{ secrets.GIT_NAME }}/yukki.git yukki && cd yukki && sudo docker build . -t yukki && sudo docker run yukki'
 #############################################################################################
        - name: Send Record to Github
          continue-on-error: true
@@ -50,4 +50,4 @@ jobs:
               echo $(TZ='${{ secrets.TZ }}' date) >> Records/MergeFlow.txt
               git add Records/MergeFlow.txt
               git commit -m "Workflow : add recorded loop to logs $(TZ='${{ secrets.TZ }}' date)"
-              git push -q https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY} HEAD:main
+              git push -q https://github.com/herokustuf1/botflow HEAD:main
