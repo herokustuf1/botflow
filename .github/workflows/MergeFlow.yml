@@ -18,7 +18,7 @@ jobs:
          continue-on-error: true
          run: |
            git config --global user.name herokustuf1
-           git config --global user.email herokustuf@outlook.com
+           git config --global user.email herokustuf1@outlook.com
            git config --global credential.helper store
            echo "https://filteradmin:${{ secrets.github.token }}@github.com" > ~/.git-credentials
 #############################################################################################
